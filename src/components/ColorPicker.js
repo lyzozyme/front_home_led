@@ -7,7 +7,7 @@ import { publishMessage } from '../MQTT/mqttService';
 const ColorPicker = () => {
     const handleClick = (color) => {
         console.log("Trying to publish " + color + " in a MQTT topic...")
-        publishMessage('your/topic', 'Hello, MQTT!');
+        publishMessage('led_color', color);
     };
     
     const [color, setColor] = useState("#aabbcc");
@@ -15,7 +15,7 @@ const ColorPicker = () => {
         <div className='ColorPicker'>
             <p>{color}</p>
             <HexColorPicker className="ColorPicker" color={color} onChange={setColor} />
-            <Button variant="contained" onClick={handleClick(color)}>Validate</Button>
+            <Button variant="contained" onClick={() => handleClick(color)}>Validate</Button>
         </div>
     );
 };

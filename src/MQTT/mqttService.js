@@ -2,6 +2,16 @@
 import mqtt from 'mqtt';
 import config from '../config.json';
 
+// let localConfig;
+
+// try {
+//   localConfig = require('./config.local.json');
+// } catch (error) {
+//   console.warn('No local configuration file found, using default config.json');
+// }
+
+// const mqttConfig = localConfig?.mqtt || config.mqtt;
+
 const { brokerUrl, options } = config.mqtt;
 
 const client = mqtt.connect(brokerUrl, options);

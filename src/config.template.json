@@ -1,0 +1,10 @@
+{
+  "mqtt": {
+    "brokerUrl": "my_mqtt_url:1883",
+    "options": {
+      "clientId": "my_client_id",
+      "username": "my_username",
+      "password": "MyStr0nGpA$$w0rD"
+    }
+  }
+}
