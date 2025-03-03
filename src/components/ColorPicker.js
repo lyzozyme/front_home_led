@@ -7,20 +7,24 @@ import { publishMessage } from '../MQTT/mqttService';
 
 const ColorPicker = () => {
     const [checked, setChecked] = React.useState(true);
+    const [color, setColor] = useState("#aabbcc");
 
     const handleChange = (event) => {
         var is_checked = event.target.checked
         setChecked(is_checked);
-        console.log("Trying to publish " + is_checked ? "on" : "off" + " in led_color topic...")
-        publishMessage('led_color', is_checked ? "on" : "off")
+        if (!is_checked) {
+            publishMessage('led_power', "off");
+        }
+        else {
+            publishMessage('led_color', color.slice(1));
+        }
     };
 
     const handleClick = (color) => {
         console.log("Trying to publish " + color + " in led_color topic...")
-        publishMessage('led_color', color);
+        publishMessage('led_color', color.slice(1));
     };
     
-    const [color, setColor] = useState("#aabbcc");
     return (
         <div className='ColorPicker'>
             <p>{color}</p>
@@ -31,7 +35,7 @@ const ColorPicker = () => {
                 color="warning"
             />
             <HexColorPicker className="ColorPicker" color={color} onChange={setColor} />
-            <Button variant="contained" onClick={() => handleClick(color)}>Validate</Button>
+            <Button variant="contained" disabled={!checked} onClick={() => handleClick(color)}>Validate</Button>
         </div>
     );
 };
